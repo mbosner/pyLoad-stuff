@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="pyLoad-stuff : pyLoad Hooks to automate the downloading and sorting process">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>pyLoad-stuff</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Gutz-Pilz/pyLoad-stuff">View on GitHub</a>
+
+          <h1 id="project_title">pyLoad-stuff</h1>
+          <h2 id="project_tagline">pyLoad Hooks to automate the downloading and sorting process</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Gutz-Pilz/pyLoad-stuff/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Gutz-Pilz/pyLoad-stuff/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="hook-hdareaorgpy" class="anchor" href="#hook-hdareaorgpy"><span class="octicon octicon-link"></span></a>[Hook] HDAreaOrg.py</h1>
+
+<ul>
+<li>standalone Moviefetcher</li>
+<li>gets all Movies from HD-AR** and grab rating, title and genre from IMDb</li>
+<li>gets a clean title from imdb (year)</li>
+<li>gets only your preferred hoster</li>
+<li>2 factor rating - one for directly adding it to the Queue and one for later decision to the Collector</li>
+<li>decide which genre you'd not want to download</li>
+<li>pushover notifications</li>
+</ul><h1>
+<a name="hook-sjpy" class="anchor" href="#hook-sjpy"><span class="octicon octicon-link"></span></a>[Hook] SJ.py</h1>
+
+<ul>
+<li>uses the serienjunk**s episode rss to fetch the latest episodes</li>
+<li>decide which quality, language and hoster you prefer</li>
+<li>create a SJ.txt in your pyload folder with all the seriesnames (each a new line)</li>
+<li>pushover notifications</li>
+</ul><h1>
+<a name="hook-filebotpy" class="anchor" href="#hook-filebotpy"><span class="octicon octicon-link"></span></a>[Hook] FileBot.py</h1>
+
+<p>This Hook uses the FileBot program from rednoah to have downloaded Movies/Series/Animes automatically renamed and sorted.</p>
+
+<p>download FileBot.py and copy it into your pyload/hooks folder.
+restart pyload and configure it.</p>
+
+<h1>
+<a name="filebotsh" class="anchor" href="#filebotsh"><span class="octicon octicon-link"></span></a>FileBot.sh</h1>
+
+<p>Some additional stuff happening to the moved File</p>
+
+<ul>
+<li>modify creation date (to have it stored "recently added" in XBMC)</li>
+<li>update XBMC LIbrary</li>
+<li>make it read / writeable for everyone (something i need to do)</li>
+<li>send email with location of the file and changed filesize (nice to have)</li>
+</ul><p>Have fun
+Gutz-Pilz</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">pyLoad-stuff maintained by <a href="https://github.com/Gutz-Pilz">Gutz-Pilz</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
