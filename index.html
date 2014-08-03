@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="pyLoad-stuff : pyLoad Hooks to automate the downloading and sorting process">
+    <meta name="viewport" content="width=640">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
 
-    <title>pyLoad-stuff</title>
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>pyLoad-stuff by Gutz-Pilz</title>
   </head>
 
   <body>
+    <a id="forkme_banner" href="https://github.com/Gutz-Pilz/pyLoad-stuff">View on GitHub</a>
+    <div class="shell">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/Gutz-Pilz/pyLoad-stuff">View on GitHub</a>
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>pyLoad-stuff</h1>
+            <h2>pyLoad Hooks to automate the downloading and sorting process</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
 
-          <h1 id="project_title">pyLoad-stuff</h1>
-          <h2 id="project_tagline">pyLoad Hooks to automate the downloading and sorting process</h2>
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/Gutz-Pilz/pyLoad-stuff/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/Gutz-Pilz/pyLoad-stuff/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/Gutz-Pilz/pyLoad-stuff/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/Gutz-Pilz/pyLoad-stuff/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
         <h1>
-<a name="hook-hdareaorgpy" class="anchor" href="#hook-hdareaorgpy"><span class="octicon octicon-link"></span></a>[Hook] HDAreaOrg.py</h1>
+<a name="hook-hdareaorgpy" class="anchor" href="#hook-hdareaorgpy"><span class="octicon octicon-link"></span></a><a href="HDAreaOrg.py">[Hook] HDAreaOrg.py</a>
+</h1>
 
 <ul>
 <li>standalone Moviefetcher</li>
@@ -43,7 +59,8 @@
 <li>decide which genre you'd not want to download</li>
 <li>pushover notifications</li>
 </ul><h1>
-<a name="hook-sjpy" class="anchor" href="#hook-sjpy"><span class="octicon octicon-link"></span></a>[Hook] SJ.py</h1>
+<a name="hook-sjpy" class="anchor" href="#hook-sjpy"><span class="octicon octicon-link"></span></a><a href="SJ.py">[Hook] SJ.py</a>
+</h1>
 
 <ul>
 <li>uses the serienjunk**s episode rss to fetch the latest episodes</li>
@@ -51,7 +68,8 @@
 <li>create a SJ.txt in your pyload folder with all the seriesnames (each a new line)</li>
 <li>pushover notifications</li>
 </ul><h1>
-<a name="hook-filebotpy" class="anchor" href="#hook-filebotpy"><span class="octicon octicon-link"></span></a>[Hook] FileBot.py</h1>
+<a name="hook-filebotpy" class="anchor" href="#hook-filebotpy"><span class="octicon octicon-link"></span></a><a href="FileBot.py">[Hook] FileBot.py</a>
+</h1>
 
 <p>This Hook uses the FileBot program from rednoah to have downloaded Movies/Series/Animes automatically renamed and sorted.</p>
 
@@ -59,7 +77,8 @@
 restart pyload and configure it.</p>
 
 <h1>
-<a name="filebotsh" class="anchor" href="#filebotsh"><span class="octicon octicon-link"></span></a>FileBot.sh</h1>
+<a name="filebotsh" class="anchor" href="#filebotsh"><span class="octicon octicon-link"></span></a><a href="filebot.sh">FileBot.sh</a>
+</h1>
 
 <p>Some additional stuff happening to the moved File</p>
 
@@ -71,17 +90,21 @@ restart pyload and configure it.</p>
 </ul><p>Have fun
 Gutz-Pilz</p>
       </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">pyLoad-stuff maintained by <a href="https://github.com/Gutz-Pilz">Gutz-Pilz</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/Gutz-Pilz">Gutz-Pilz</a> can be found on <a href="https://github.com/Gutz-Pilz/pyLoad-stuff">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
       </footer>
+
     </div>
 
     
-
   </body>
 </html>
