@@ -5,34 +5,34 @@ import re
 
 from time import sleep
 
-from module.lib.BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 
 from module.plugins.Crypter import Crypter
-from module.unescape import unescape
+from module.utils import html_unescape
 
 
 class SerienjunkiesOrg(Crypter):
     __name__ = "SerienjunkiesOrg"
     __type__ = "crypter"
-    __version__ = "0.39"
+    __version__ = "0.40"
 
-    __pattern__ = r'http://(?:www\.)?(serienjunkies.org|dokujunkies.org)/.*?'
+    __pattern__ = r'http://(?:www\.)?(download\.)?(serienjunkies|dokujunkies)\.org/.+'
     __config__ = [("changeNameSJ", "Packagename;Show;Season;Format;Episode", "Take SJ.org name", "Show"),
                   ("changeNameDJ", "Packagename;Show;Format;Episode", "Take DJ.org name", "Show"),
                   ("randomPreferred", "bool", "Randomize Preferred-List", False),
-                  ("hosterListMode", "OnlyOne;OnlyPreferred(One);OnlyPreferred(All);All",
-                   "Use for hosters (if supported)", "All"),
-                  ("hosterList", "str", "Preferred Hoster list (comma separated)",
-                   "RapidshareCom,UploadedTo,NetloadIn,FilefactoryCom,FreakshareNet,FilebaseTo,HotfileCom,DepositfilesCom,EasyshareCom,KickloadCom"),
-                  ("ignoreList", "str", "Ignored Hoster list (comma separated)", "MegauploadCom")]
+                  ("hosterListMode", "Only one;Only preferred (One);Only preferred (All);All", "Use for", "All"),
+                  ("hosterList", "str", "Preferred Hoster list (comma separated)", ""),
+                  ("ignoreList", "str", "Ignored Hoster list (comma separated)", "")]
 
     __description__ = """Serienjunkies.org decrypter plugin"""
-    __author_name__ = ("mkaay", "godofdream")
-    __author_mail__ = ("mkaay@mkaay.de", "soilfiction@gmail.com")
+    __license__ = "GPLv3"
+    __authors__ = [("mkaay", "mkaay@mkaay.de"),
+                   ("godofdream", "soilfiction@gmail.com")]
 
 
     def setup(self):
         self.multiDL = False
+
 
     def getSJSrc(self, url):
         src = self.req.load(str(url))
@@ -43,12 +43,13 @@ class SerienjunkiesOrg(Crypter):
             src = self.req.load(str(url))
         return src
 
+
     def handleShow(self, url):
         src = self.getSJSrc(url)
         soup = BeautifulSoup(src)
         packageName = self.pyfile.package().name
         if self.getConfig("changeNameSJ") == "Show":
-            found = unescape(soup.find("h2").find("a").string.split(' &#8211;')[0])
+            found = html_unescape(soup.find("h2").find("a").string.split(' &#8211;')[0])
             if found:
                 packageName = found
 
@@ -65,13 +66,14 @@ class SerienjunkiesOrg(Crypter):
         else:
             self.core.files.addLinks(package_links, self.pyfile.package().id)
 
+
     def handleSeason(self, url):
         src = self.getSJSrc(url)
         soup = BeautifulSoup(src)
         post = soup.find("div", attrs={"class": "post-content"})
         ps = post.findAll("p")
 
-        seasonName = unescape(soup.find("a", attrs={"rel": "bookmark"}).string).replace("&#8211;", "-")
+        seasonName = html_unescape(soup.find("a", attrs={"rel": "bookmark"}).string).replace("&#8211;", "-")
         groups = {}
         gid = -1
         for p in ps:
@@ -79,7 +81,7 @@ class SerienjunkiesOrg(Crypter):
                 var = p.findAll("strong")
                 opts = {"Sprache": "", "Format": ""}
                 for v in var:
-                    n = unescape(v.string).strip()
+                    n = html_unescape(v.string).strip()
                     n = re.sub(r"^([:]?)(.*?)([:]?)$", r'\2', n)
                     if n.strip() not in opts:
                         continue
@@ -124,6 +126,7 @@ class SerienjunkiesOrg(Crypter):
             self.core.files.addLinks(links, self.pyfile.package().id)
         elif (self.getConfig("changeNameSJ") == "Season") or not re.search("#hasName", url):
             self.packages.append((seasonName, links, seasonName))
+
 
     def handleEpisode(self, url):
         src = self.getSJSrc(url)
@@ -172,6 +175,7 @@ class SerienjunkiesOrg(Crypter):
                     eName = h1.text
                 self.packages.append((eName, links, eName))
 
+
     def handleOldStyleLink(self, url):
         sj = self.req.load(str(url))
         soup = BeautifulSoup(sj)
@@ -189,16 +193,18 @@ class SerienjunkiesOrg(Crypter):
             self.retry()
         self.core.files.addLinks([decrypted], self.pyfile.package().id)
 
+
     def handleFrame(self, url):
         self.req.load(str(url))
         return self.req.lastEffectiveURL
+
 
     def handleShowDJ(self, url):
         src = self.getSJSrc(url)
         soup = BeautifulSoup(src)
         post = soup.find("div", attrs={"id": "page_post"})
         ps = post.findAll("p")
-        found = unescape(soup.find("h2").find("a").string.split(' &#8211;')[0])
+        found = html_unescape(soup.find("h2").find("a").string.split(' &#8211;')[0])
         if found:
             seasonName = found
 
@@ -209,7 +215,7 @@ class SerienjunkiesOrg(Crypter):
                 var = p.findAll("strong")
                 opts = {"Sprache": "", "Format": ""}
                 for v in var:
-                    n = unescape(v.string).strip()
+                    n = html_unescape(v.string).strip()
                     n = re.sub(r"^([:]?)(.*?)([:]?)$", r'\2', n)
                     if n.strip() not in opts:
                         continue
@@ -255,6 +261,7 @@ class SerienjunkiesOrg(Crypter):
         elif (self.getConfig("changeNameDJ") == "Show") or not re.search("#hasName", url):
             self.packages.append((seasonName, links, seasonName))
 
+
     def handleCategoryDJ(self, url):
         package_links = []
         src = self.getSJSrc(url)
@@ -263,6 +270,7 @@ class SerienjunkiesOrg(Crypter):
         for a in content.findAll("a", attrs={"rel": "bookmark"}):
             package_links.append(a['href'])
         self.core.files.addLinks(package_links, self.pyfile.package().id)
+
 
     def decrypt(self, pyfile):
         showPattern = re.compile("^http://serienjunkies.org/serie/(.*)/$")
@@ -288,6 +296,7 @@ class SerienjunkiesOrg(Crypter):
         elif categoryPatternDJ.match(url):
             self.handleCategoryDJ(url)
 
+
     #selects the preferred hoster, after that selects any hoster (ignoring the one to ignore)
     def getpreferred(self, hosterlist):
 
@@ -295,7 +304,7 @@ class SerienjunkiesOrg(Crypter):
         preferredList = self.getConfig("hosterList").strip().lower().replace(
             '|', ',').replace('.', '').replace(';', ',').split(',')
         if (self.getConfig("randomPreferred") is True) and (
-                self.getConfig("hosterListMode") in ["OnlyOne", "OnlyPreferred(One)"]):
+                self.getConfig("hosterListMode") in ["Only one", "Only preferred (One)"]):
             random.shuffle(preferredList)
             # we don't want hosters be read two times
         hosterlist2 = hosterlist.copy()
@@ -307,18 +316,18 @@ class SerienjunkiesOrg(Crypter):
                         self.logDebug("Selected " + Part)
                         result.append(str(Part))
                         del (hosterlist2[Hoster])
-                    if self.getConfig("hosterListMode") in ["OnlyOne", "OnlyPreferred(One)"]:
+                    if self.getConfig("hosterListMode") in ["Only one", "Only preferred (One)"]:
                         return result
 
         ignorelist = self.getConfig("ignoreList").strip().lower().replace(
             '|', ',').replace('.', '').replace(';', ',').split(',')
-        if self.getConfig('hosterListMode') in ["OnlyOne", "All"]:
+        if self.getConfig('hosterListMode') in ["Only one", "All"]:
             for Hoster in hosterlist2:
                 if Hoster.strip().lower().replace('.', '') not in ignorelist:
                     for Part in hosterlist2[Hoster]:
                         self.logDebug("Selected2 " + Part)
                         result.append(str(Part))
 
-                    if self.getConfig('hosterListMode') == "OnlyOne":
+                    if self.getConfig('hosterListMode') == "Only one":
                         return result
         return result
